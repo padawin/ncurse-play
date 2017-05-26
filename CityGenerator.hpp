@@ -11,15 +11,19 @@ struct S_Block {
 	int y = 0;
 	int width = 0;
 	int height = 0;
+	std::vector<S_Block> subBlocks = {};
 };
 
 class CityGenerator {
 	private:
 	S_Block m_cityBlocks;
 
-	void _split(S_Block block);
+	void _split(S_Block &block);
+	void _splitVertically(S_Block &block);
+	void _splitHorizontally(S_Block &block);
 
 	public:
+	CityGenerator();
 	void generate(int width, int height);
 };
 
