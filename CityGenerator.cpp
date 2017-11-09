@@ -1,4 +1,5 @@
 #include "CityGenerator.hpp"
+#include <ncurses.h>
 #include <stdlib.h>
 
 CityGenerator::CityGenerator() : m_cityBlocks(S_Block()) {}
@@ -78,6 +79,19 @@ void CityGenerator::_splitHorizontally(S_Block &block) {
 
 void CityGenerator::render() {
 	_renderBlock(m_cityBlocks);
-	refresh();
 }
+
+void CityGenerator::_renderBlock(S_Block block) {
+	if (block.subBlocks.size()) {
+		for (auto subBlock : block.subBlocks) {
+			_renderBlock(subBlock);
+		}
+	}
+	else {
+		for (int i = block.x; i < block.x + block.width; ++i) {
+			for (int j = block.y; j < block.y + block.height; ++j) {
+				mvprintw(j, i, "#");
+			}
+		}
+	}
 }

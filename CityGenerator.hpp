@@ -2,9 +2,9 @@
 #define __CITY_GENERATOR__
 
 #include <vector>
+#include <memory>
 
-#define MIN_SIZE_BUILDING 5
-#define MAX_SIZE_BUILDING 8
+#define MIN_SIZE_BUILDING 3
 
 struct S_Block {
 	int x = 0;
@@ -21,10 +21,12 @@ class CityGenerator {
 	void _split(S_Block &block);
 	void _splitVertically(S_Block &block);
 	void _splitHorizontally(S_Block &block);
+	void _renderBlock(S_Block block);
 
 	public:
 	CityGenerator();
 	void generate(int width, int height);
+	void render();
 };
 
 #endif
